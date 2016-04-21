@@ -1,13 +1,12 @@
-FROM pritunl/archlinux
+FROM pritunl/archlinux:latest
 MAINTAINER Edward Hernandez
 
 RUN pacman --noconfirm -Syyuu
-RUN pacman --noconfirm -S \
+RUN pacman --noconfirm -S  \
 		base-devel \
-		git \
+		git        \
 		sudo
 
-RUN sed -i 's/^\(*\s-\snice\)/#\1/' /etc/security/limits.conf
 RUN sed -i '/NOPASSWD/s/\#//' /etc/sudoers
 RUN useradd -r -g wheel pacaur
 
