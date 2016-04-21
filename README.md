@@ -2,33 +2,21 @@
 
 An AUR-capable Docker image.
 
-### Rationale
+## Rationale
 
-This image is inspired by [chrert](https://hub.docker.com/u/chrert)'s
-[docker-arch-yaourt](https://hub.docker.com/r/chrert/docker-arch-yaourt/)
-image.
+This image is inspired by [chrert](https://hub.docker.com/u/chrert)'s [docker-arch-yaourt](https://hub.docker.com/r/chrert/docker-arch-yaourt/) image.
 
-It is intended to be used to manage dependencies from the AUR with
-[pacaur](https://github.com/rmarquis/pacaur) in an otherwise minimal Arch
-image.
+It is intended to be used to manage dependencies from the AUR with [pacaur](https://github.com/rmarquis/pacaur) in an otherwise minimal Arch image.
 
-### Details
+## Details
 
-This image is built atop [pritunl](https://hub.docker.com/u/pritunl)'s
-[archlinux](https://hub.docker.com/r/pritunl/archlinux/), and will be updated
-to match each release.
+This image is built atop [pritunl](https://hub.docker.com/u/pritunl)'s [archlinux](https://hub.docker.com/r/pritunl/archlinux/), and will be updated to match each release.
 
-This image provides additionally a user `build` in the group `wheel`.
-`/etc/sudoers/` is configured such that users in `wheel` have `sudo` privileges
-without a password, allowing operations like `pacaur --noconfirm -S
-python-xlib` *just work* for `build`.
+This image provides additionally a user `build` in the group `wheel`. `/etc/sudoers/` is configured such that users in `wheel` have `sudo` privileges without a password, allowing operations like `pacaur --noconfirm -S python-xlib` *just work* for `build`.
 
-This user can also be used to build your own `PKGBUILD`s.  This image provides
-the directories `/build` and `/home/build` which belong to to `build`.
-`/home/build` exists only to contain `~/.gnupg` for `build`, so `PKGBUILD`s
-should be built in subdirectories of `/home/build`.
+This user can also be used to build your own `PKGBUILD`s.  This image provides the directories `/build` and `/home/build` which belong to to `build`. `/home/build` exists only to contain `~/.gnupg` for `build`, so `PKGBUILD`s should be built in subdirectories of `/home/build`.
 
-### Usage
+## Usage
 
 Here's an example Dockerfile using this as a base image:
 
