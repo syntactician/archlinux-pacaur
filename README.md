@@ -10,7 +10,7 @@ It is intended to be used to manage dependencies from the AUR with [pacaur](http
 
 ## Details
 
-This image is built atop [pritunl](https://hub.docker.com/u/pritunl)'s [archlinux](https://hub.docker.com/r/pritunl/archlinux/), and will be updated to match each release.
+This image is built atop [greyltc](https://hub.docker.com/u/greyltc)'s very transparent [archlinux](https://hub.docker.com/r/greyltc/archlinux/) image, and automatically builds to match each release.
 
 This image provides additionally a user `build` in the group `wheel`. `/etc/sudoers/` is configured such that users in `wheel` have `sudo` privileges without a password, allowing operations like `pacaur --noconfirm -S python-flask-git` *just work* for `build`.
 
@@ -24,11 +24,8 @@ Here's an example Dockerfile using this as a base image:
 FROM syntactician/archlinux-pacaur
 MAINTAINER Your Name
 
-# act as build user
-USER build
-
 # install from AUR
-RUN pacaur --noconfirm -S python-flask-git
+su build -c 'pacaur --noconfirm -S python-flask-git'
 
 # build from a custom PKGBUILD via github
 WORKDIR /build
