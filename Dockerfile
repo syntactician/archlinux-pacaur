@@ -35,6 +35,7 @@ USER root
 
 RUN sed -i '/silent/s/true/false/; /silent/s/#//' /etc/xdg/pacaur/config
 ENV AURDEST /build
+ENV PACMAN pacaur
 
 WORKDIR /
 RUN paccache -r -k0
