@@ -21,6 +21,7 @@ RUN chown -R build /home/build
 USER build
 RUN gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
 
+ENV PATH="/usr/bin/core_perl:${PATH}"
 WORKDIR /build
 RUN git clone https://aur.archlinux.org/cower.git
 WORKDIR /build/cower
@@ -35,11 +36,16 @@ USER root
 
 RUN sed -i '/silent/s/true/false/; /silent/s/#//' /etc/xdg/pacaur/config
 ENV AURDEST /build
-ENV PACMAN pacaur
 
 WORKDIR /
+
+RUN pacman -S --noconfirm nano
+ENV EDITOR "nano"
+
 RUN paccache -r -k0
 RUN pacaur -Scc
 RUN rm -rf /usr/share/man/*
 RUN rm -rf /tmp/*
 RUN rm -rf /var/tmp/*
+
+USER build
